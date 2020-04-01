@@ -9,8 +9,7 @@ namespace DZ_2
     {
         static void Main(string[] args)
         {
-            Test();
-            /*string path = "C:/Users/Admin/RiderProjects/DZ_2/NewFile1.txt";
+            string path = "C:/Users/Admin/RiderProjects/DZ_2/NewFile1.txt";
             string tasck;
             List<string> list=new List<string>();
             bool tumbler = true;
@@ -30,8 +29,11 @@ namespace DZ_2
                 Console.WriteLine(
                     "If you want to add new tasck print 'add' " +
                     "\nIf you wont to delete your taskk print 'delete'" +
-                    "\nIf you want to exit print 'exit' ");
+                    "\nIf you want to exit print 'exit'\n" +
+                    "If you want to open remaimder print 'rem' ");
                 string add = Console.ReadLine();
+                if (add == "rem")
+                    Test();
                 if (add == "exit")
                     tumbler = false;
                 if (add == "add")
@@ -73,7 +75,7 @@ namespace DZ_2
                         }
                     }
                 }
-            }*/
+            }
         }
 
         public static void CreateList()
@@ -82,11 +84,13 @@ namespace DZ_2
         }
             public static void Test()
             {
+                bool tumbler = true;
                 string path2 = "C:/Users/Admin/RiderProjects/DZ_2/NewFile2.txt";
                 string tasck;
                 DateTime thisDay = DateTime.Today;
                 string day = thisDay.ToString("d");
                 List<string> list2=new List<string>();
+                List<string> list3=new List<string>();
                 using (StreamReader sr = new StreamReader(path2))
                 {
                     string line;
@@ -98,8 +102,14 @@ namespace DZ_2
                 Console.WriteLine("Remaind for today");
                 for (int i = 0; i < list2.Count; i++)
                 {
-                    if(list2[i]==day)
-                        Console.WriteLine(" "+list2[i-1]);
+                    if (list2[i] == day)
+                    {
+                        Console.WriteLine(" " + list2[i - 1]);
+                        list3.Add(list2[i-1]);
+                        list3.Add(list2[i]);
+                        list2.Remove(list2[i-1]);
+                        list2.Remove(list2[i]);
+                    }
                 }
                 Console.WriteLine("input your tasck");
                 tasck = Console.ReadLine();
@@ -123,6 +133,28 @@ namespace DZ_2
                     {
                         list2[k - 1] = line;
                         k++;
+                    }
+                }
+                Console.WriteLine("Print the number of tasck");
+                int number = Convert.ToInt32(Console.ReadLine());
+                File.WriteAllText(path2, string.Empty);
+                list2.Remove(list3[number - 1]);
+                list2.Remove(list3[number - 2]);
+                File.AppendAllText(path2, "");
+                for (int j = 0; j < list2.Count; j++)
+                {
+
+                    using (StreamWriter sw = new StreamWriter(path2, true))
+                    {
+                        sw.WriteLine(list2[j]);
+                    }
+                }
+                for (int j = 0; j < list3.Count; j++)
+                {
+
+                    using (StreamWriter sw = new StreamWriter(path2, true))
+                    {
+                        sw.WriteLine(list3[j]);
                     }
                 }
             }
