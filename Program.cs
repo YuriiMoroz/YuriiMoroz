@@ -13,29 +13,36 @@ namespace DZ_2
             string tasck;
             List<string> list=new List<string>();
             bool tumbler = true;
-            using (StreamReader sr = new StreamReader(path))
-            {
-                string line;
-                int k = 1;
-                while ((line = sr.ReadLine()) != null)
-                {
-                    list.Add(line);
-                    Console.WriteLine(k+" "+line);
-                    k++;
-                }
-            }
             while (tumbler)
             {
                 Console.WriteLine(
-                    "If you want to add new tasck print 'add' " +
-                    "\nIf you wont to delete your taskk print 'delete'" +
-                    "\nIf you want to exit print 'exit'\n" +
+                    "If you want to use todo manager print 'todo'\n" +
                     "If you want to open remaimder print 'rem' ");
-                string add = Console.ReadLine();
-                if (add == "rem")
+                string add2 = Console.ReadLine();
+              
+                if (add2 == "rem")
                     Test();
-                if (add == "exit")
+                if (add2 == "exit")
                     tumbler = false;
+                if (add2 == "todo")
+                {
+                    Console.WriteLine(
+                        "If you want to add new tasck print 'add' " +
+                        "\nIf you wont to delete your taskk print 'delete'" +
+                        "\nIf you want to exit print 'exit'\n");
+                }
+                string add = Console.ReadLine();
+                using (StreamReader sr = new StreamReader(path))
+                {
+                    string line;
+                    int k = 1;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        list.Add(line);
+                        Console.WriteLine(k+" "+line);
+                        k++;
+                    }
+                }
                 if (add == "add")
                 {
                     Console.WriteLine("input your tasck");
@@ -91,7 +98,6 @@ namespace DZ_2
             DateTime thisDay = DateTime.Today;
             string day = thisDay.ToString("d");
             List<string> list2 = new List<string>();
-            List<string> list3 = new List<string>();
             while (tumbler2)
             {
                 Console.WriteLine(
@@ -118,10 +124,6 @@ namespace DZ_2
                         if (list2[i] == day)
                         {
                             Console.WriteLine(" " + list2[i - 1]);
-                            list3.Add(list2[i - 1]);
-                            list3.Add(list2[i]);
-                            list2.Remove(list2[i - 1]);
-                            list2.Remove(list2[i]);
                         }
                     }
 
@@ -168,15 +170,6 @@ namespace DZ_2
                         using (StreamWriter sw = new StreamWriter(path2, true))
                         {
                             sw.WriteLine(list2[j]);
-                        }
-                    }
-
-                    for (int j = 0; j < list3.Count; j++)
-                    {
-
-                        using (StreamWriter sw = new StreamWriter(path2, true))
-                        {
-                            sw.WriteLine(list3[j]);
                         }
                     }
                 }
