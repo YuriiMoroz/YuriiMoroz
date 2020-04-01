@@ -9,7 +9,8 @@ namespace DZ_2
     {
         static void Main(string[] args)
         {
-            string path = "C:/Users/Admin/RiderProjects/DZ_2/NewFile1.txt";
+            Test();
+            /*string path = "C:/Users/Admin/RiderProjects/DZ_2/NewFile1.txt";
             string tasck;
             List<string> list=new List<string>();
             bool tumbler = true;
@@ -41,17 +42,6 @@ namespace DZ_2
                     {
                         sw.WriteLine(tasck);
                     }
-
-                    /*using (StreamReader sr = new StreamReader(path))
-                    {
-                        string line;
-                        int k = 1;
-                        while ((line = sr.ReadLine()) != null)
-                        {
-                            Console.WriteLine(k + " " + line);
-                            k++;
-                        }
-                    }*/
                     using (StreamReader sr = new StreamReader(path))
                     {
                         string line;
@@ -83,7 +73,58 @@ namespace DZ_2
                         }
                     }
                 }
+            }*/
+        }
+
+        public static void CreateList()
+        {
+            
+        }
+            public static void Test()
+            {
+                string path2 = "C:/Users/Admin/RiderProjects/DZ_2/NewFile2.txt";
+                string tasck;
+                DateTime thisDay = DateTime.Today;
+                string day = thisDay.ToString("d");
+                List<string> list2=new List<string>();
+                using (StreamReader sr = new StreamReader(path2))
+                {
+                    string line;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        list2.Add(line);
+                    }
+                }
+                Console.WriteLine("Remaind for today");
+                for (int i = 0; i < list2.Count; i++)
+                {
+                    if(list2[i]==day)
+                        Console.WriteLine(" "+list2[i-1]);
+                }
+                Console.WriteLine("input your tasck");
+                tasck = Console.ReadLine();
+                using (StreamWriter sw = new StreamWriter(path2, true))
+                {
+                    sw.WriteLine(tasck);
+                }
+                Console.WriteLine("input your data");
+                tasck = Console.ReadLine();
+                using (StreamWriter sw = new StreamWriter(path2, true))
+                {
+                    sw.WriteLine(tasck);
+                }
+                using (StreamReader sr = new StreamReader(path2))
+                {
+                    string line;
+                    list2.Add("tasck");
+                    list2.Add("tasck");
+                    int k = 1;
+                    while ((line = sr.ReadLine()) != null)
+                    {
+                        list2[k - 1] = line;
+                        k++;
+                    }
+                }
             }
         }
     }
-}
